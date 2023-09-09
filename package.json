@@ -31,5 +31,16 @@
     "nyc": "^15.1.0",
     "prettier": "^3.0.3",
     "supertest": "^6.3.3"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "lcov"
+    ],
+    "check-coverage": true,
+    "branches": 60,
+    "functions": 60,
+    "lines": 60,
+    "statements": 60
   }
 }

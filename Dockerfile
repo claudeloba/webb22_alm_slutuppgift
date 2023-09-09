@@ -2,7 +2,7 @@ FROM node:20-alpine3.17
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install
 
@@ -12,4 +12,4 @@ EXPOSE 5050
 
 ENV NODE_ENV production
 
-CMD ["npm", "start"]
+CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"test\" ]; then npm run coverage; else npm start; fi"]

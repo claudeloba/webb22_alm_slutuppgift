@@ -55,32 +55,26 @@ jobs:
           docker build -t ghcr.io/${{ github.repository }}/webb22claude:${{ github.sha }} .
           docker push ghcr.io/${{ github.repository }}/webb22claude:${{ github.sha }}
 
-  run-tests:
+  run-tests-in-container:
     needs: build-and-publish-docker-image
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: "development"
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      - name: Cache NPM Dependencies
-        uses: actions/cache@v3.3.2
-        with:
-          path: ~/.npm
-          key: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ env.cache-name }}-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-      - name: Install Dependencies
-        run: npm install
-      - name: Run Integration & Unit Tests with Coverage
-        run: npm run coverage
+
+      - name: Run the Docker container in test mode
+        run: |
+          docker run -d \
+            --name test-container \
+            -e NODE_ENV=test \
+            -p 5050:5050 \
+            ghcr.io/${{ github.repository }}/webb22claude:${{ github.sha }}
+
+      - name: Run Integration & Unit Tests in Container
+        run: docker exec -e NODE_ENV=test test-container npm run coverage
 
   fake-deploy:
-    needs: run-tests
+    needs: run-tests-in-container
     runs-on: ubuntu-latest
     env:
       NODE_ENV: "production"
