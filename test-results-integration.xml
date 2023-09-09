@@ -1,8 +1,8 @@
-<testsuite name="Mocha Tests" tests="6" failures="0" errors="0" skipped="0" timestamp="Sat, 09 Sep 2023 22:26:31 GMT" time="0.061">
-<testcase classname="Express Application Route Tests GET /" name="should render the index page with title &#x22;Express&#x22;" time="0.026"/>
-<testcase classname="Express Application Route Tests GET /users" name="should return json with &#x22;My initials&#x22;: &#x22;C. L&#x22;" time="0.007"/>
-<testcase classname="Express Application Route Tests GET /calc/add" name="should perform addition and return the result" time="0.008"/>
-<testcase classname="Express Application Route Tests GET /calc/add" name="should return 400 for invalid input" time="0.006"/>
+<testsuite name="Mocha Tests" tests="6" failures="0" errors="0" skipped="0" timestamp="Sat, 09 Sep 2023 23:09:13 GMT" time="0.057">
+<testcase classname="Express Application Route Tests GET /" name="should render the index page with title &#x22;Express&#x22;" time="0.024"/>
+<testcase classname="Express Application Route Tests GET /users" name="should return json with &#x22;My initials&#x22;: &#x22;C. L&#x22;" time="0.006"/>
+<testcase classname="Express Application Route Tests GET /calc/add" name="should perform addition and return the result" time="0.006"/>
+<testcase classname="Express Application Route Tests GET /calc/add" name="should return 400 for invalid input" time="0.005"/>
 <testcase classname="GET /calc/subtract" name="should perform subtraction and return the result" time="0.006"/>
-<testcase classname="GET /calc/subtract" name="should return 400 for invalid input" time="0.006"/>
+<testcase classname="GET /calc/subtract" name="should return 400 for invalid input" time="0.005"/>
 </testsuite>
