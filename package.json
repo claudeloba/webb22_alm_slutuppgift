@@ -7,7 +7,11 @@
     "lint": "eslint \"**/*.js\" --quiet",
     "lint-fix": "eslint --fix .",
     "start": "node ./bin/www",
-    "prepare": "husky install"
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production') { require('husky').install() }\"",
+    "test:unit": "mocha \"test/calculator.test.js\" \"test/dummy.test.js\" --reporter xunit --reporter-options output=./test-results-unit.xml",
+    "test:integration": "mocha \"test/app.test.js\" --reporter xunit --reporter-options output=./test-results-integration.xml",
+    "test": "npm run test:unit && npm run test:integration",
+    "coverage": "nyc npm test"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -23,6 +27,9 @@
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.0",
-    "prettier": "^3.0.3"
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "^3.0.3",
+    "supertest": "^6.3.3"
   }
 }
