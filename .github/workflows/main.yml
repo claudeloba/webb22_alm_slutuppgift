@@ -52,8 +52,8 @@ jobs:
         run: echo ${{ secrets.DOCKER_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build and Push Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/webb22claude:${{ github.sha }} .
-          docker push ghcr.io/${{ github.repository }}/webb22claude:${{ github.sha }}
+          docker build -t ghcr.io/${{ github.repository }}/webb22claude:latest .
+          docker push ghcr.io/${{ github.repository }}/webb22claude:latest
 
   run-tests-in-container:
     needs: build-and-publish-docker-image
@@ -68,7 +68,7 @@ jobs:
             --name test-container \
             -e NODE_ENV=test \
             -p 5050:5050 \
-            ghcr.io/${{ github.repository }}/webb22claude:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/webb22claude:latest
 
       - name: Run Integration & Unit Tests in Container
         run: docker exec -e NODE_ENV=test test-container npm run coverage
